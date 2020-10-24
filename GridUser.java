@@ -1,41 +1,48 @@
 import java.util.ArrayList;
+import gridsim.GridSim;
+import gridsim.GridSimTags;
 
-// Responsible for separating the matrix and sending it and receiving the result and building it back again
-public class GridUser {
-	
-	private int B[][] = { { 1, 1, 2, 2 }, 
-            			{ 2, 2, 3, 2 }, 
-            			{ 3, 3, 5, 3 },
-            			{ 4, 4, 1, 4 }};
-		
-	private int A[][] = { { 1, 1, 1, 1}, 
-            			{ 2, 2, 2, 2}, 
-            			{ 3, 3, 3, 3}};
+public class GridUser extends GridSim {
+
+	private int B[][];
+	private int A[][];
 
 	private ArrayList<CompUnit> allocatedCompUnits;
 	
-	public GridUser() {
+	public GridUser(String s, int[][] A ,int[][] B) throws Exception {
+		super(s);
+		this.A = A;
+		this.B = B;
 		this.allocatedCompUnits = new ArrayList<CompUnit>();
 		body();
 	}
 	
 	// Separate each matrix into two pieces
-	private void body() {
+	public void body() {
+		
+		MainPanel mainPanel = MainPanel.getInstance();
 		
 		for(int i=0; i<A.length; i++) {
-			CompUnit compUnit = new CompUnit(A[i], B);
-			allocatedCompUnits.add(compUnit);
+			CompUnit compUnit;
+			try {
+				compUnit = mainPanel.createCompUnit(this, i);
+				allocatedCompUnits.add(compUnit);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		
-		ArrayList<int[]> resultsArrays = new ArrayList<int[]>();
+		super.send("unit1", GridSimTags.SCHEDULE_NOW, GridSimTags.PKT_FORWARD, "hola");
 		
+		ArrayList<int[]> resultsArrays = new ArrayList<int[]>();
+			
 		for(int i=0; i<allocatedCompUnits.size(); i++) {
 			resultsArrays.add(allocatedCompUnits.get(i).returnCalculationResult());
 		}
 		
 		int[][] finalresult = CompEngine.joinMatrixFromArrays(resultsArrays);
 		
-		CompEngine.printMatrix(finalresult);
-		
+		System.out.println("\nFinal result:");
+		CompEngine.printMatrix(finalresult);	
 	}
 }
