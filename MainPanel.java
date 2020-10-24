@@ -39,10 +39,10 @@ public class MainPanel {
 			boolean trace_flag = true;
 			GridSim.init(num_user, calendar, trace_flag);
 						
+			GridUser gridUser = new GridUser("user1", A, B);
 			
 			// Starting the grid simulation
 			GridSim.startGridSimulation();
-			GridUser gridUser = new GridUser("user1", A, B);
 			
 		} catch(Exception e) {
 			e.printStackTrace();

@@ -14,7 +14,7 @@ public class GridUser extends GridSim {
 		this.A = A;
 		this.B = B;
 		this.allocatedCompUnits = new ArrayList<CompUnit>();
-		body();
+//		body();
 	}
 	
 	// Separate each matrix into two pieces
@@ -32,7 +32,8 @@ public class GridUser extends GridSim {
 			}
 		}
 		
-		super.send("unit1", GridSimTags.SCHEDULE_NOW, GridSimTags.PKT_FORWARD, "hola");
+		super.gridSimHold(100);
+		super.send("unit2", 100, 15);
 		
 		ArrayList<int[]> resultsArrays = new ArrayList<int[]>();
 			
@@ -43,6 +44,6 @@ public class GridUser extends GridSim {
 		int[][] finalresult = CompEngine.joinMatrixFromArrays(resultsArrays);
 		
 		System.out.println("\nFinal result:");
-		CompEngine.printMatrix(finalresult);	
+		CompEngine.printMatrix(finalresult);
 	}
 }

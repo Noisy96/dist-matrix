@@ -13,7 +13,6 @@ public class CompUnit extends GridSim{
 		this.A = A;
 		this.B = B;
 		performCalculation();
-		body();
 	}
 	
 	public void body() {
