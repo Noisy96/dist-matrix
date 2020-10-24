@@ -13,7 +13,7 @@ public class CompEngine {
 		int[][] outputMatrix = new int[A.length][A.length];
 		
 		if(ArowSize != BcolSize || AcolSize != BrowSize) {
-			System.out.println("\n\tWARNING! Multiplication can't be performed\n\tMatrix A row != Matrix B column");
+			System.err.println("\n\tWARNING! Multiplication can't be performed\n\tMatrix A row != Matrix B column");
 		} else {
 			for(int i=0; i<ArowSize; i++) {
 				for(int j=0; j<BcolSize; j++) {
@@ -31,7 +31,7 @@ public class CompEngine {
 	public static int calculateArrayMultiplication(int[] A, int[] B) {
 		int output = 0;
 		if(A.length != B.length) {
-			System.out.println("");
+			System.err.println("WARNING: calculateArrayMultiplication can't be performed!\nA.length != B.length");
 		}
 		else {
 			for(int i=0; i<A.length; i++) {
@@ -46,7 +46,7 @@ public class CompEngine {
 		int[] output = new int[B[0].length];
 		
 		if(A.length != B.length) {
-			System.out.println("\n\tWARNING\n\tcalculateArrayMatrixMultiplication : A.length != B.length");
+			System.err.println("\n\tWARNING\n\tcalculateArrayMatrixMultiplication : A.length != B.length");
 		}
 		else {			
 			for(int i=0; i<B[0].length; i++) {

@@ -18,11 +18,10 @@ public class CompUnit extends GridSim{
 	public void body() {
 		while(Sim_system.running()) {
 			Sim_event ev = this.receive();
-			System.out.println("try" + ev.get_tag());
 		}
 	}
 	
-	private void performCalculation() {		
+	private void performCalculation() {
 		System.out.println(this.get_name() + " is performing its calculation");
 		this.calculationResult = CompEngine.calculateArrayMatrixMultiplication(A, B);
 	}

@@ -69,6 +69,7 @@ public class MainPanel {
 		} catch (ParameterException e) {
             System.err.println("Invalid Parameters creating link " + e.getMessage());
         } catch (Exception e) {
+        	System.err.println("Invalid Parameters creating link " + e.getMessage());
         	e.printStackTrace();
         }
 		return compUnit;		
