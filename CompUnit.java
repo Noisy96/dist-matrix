@@ -4,26 +4,34 @@ import gridsim.GridSim;
 
 public class CompUnit extends GridSim{
 	
+	private final int PERFORM_CALCULATION = 10;
+	
 	private int[] A;
 	private int[][] B;
 	private int[] calculationResult;
+	private int index;
 	
-	public CompUnit(String s, int[] A, int[][] B) throws Exception {
+	public CompUnit(int index, String s, int[] A, int[][] B) throws Exception {
 		super(s);
+		System.out.println(s + " is being created");
 		this.A = A;
 		this.B = B;
-		performCalculation();
+		this.index = index;
 	}
 	
 	public void body() {
 		while(Sim_system.running()) {
 			Sim_event ev = this.receive();
+			if(ev.get_tag() == this.PERFORM_CALCULATION) {
+				this.performCalculation();
+			}
 		}
 	}
 	
 	private void performCalculation() {
 		System.out.println(this.get_name() + " is performing its calculation");
 		this.calculationResult = CompEngine.calculateArrayMatrixMultiplication(A, B);
+		send("user1", 10, 11, this.index);
 	}
 	
 	public int[] returnCalculationResult() {

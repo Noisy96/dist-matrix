@@ -110,14 +110,18 @@ public class CompEngine {
 	}
 	
 	public static void printMatrix(int M[][]) {
-		
-		int rowSize = M.length;
-		int colSize = M[0].length;
-		
-		for (int i = 0; i < rowSize; i++) { 
-			for (int j = 0; j < colSize; j++) 
-				System.out.print(M[i][j] + " "); 
-				System.out.println(); 
+		if(M == null) {
+			System.out.println("Null matrix");
+		}
+		else {
+			int rowSize = M.length;
+			int colSize = M[0].length;
+			
+			for (int i = 0; i < rowSize; i++) { 
+				for (int j = 0; j < colSize; j++) 
+					System.out.print(M[i][j] + " "); 
+					System.out.println(); 
+			}
 		}
 	}
 	
@@ -151,10 +155,15 @@ public class CompEngine {
 	}
 	
 	public static void printArray(int A[]) {
-		for(int i=0; i<A.length; i++) {
-			System.out.print(A[i]+" ");
+		if(A == null) {
+			System.out.println("Null array");
 		}
-		System.out.println();
+		else {
+			for(int i=0; i<A.length; i++) {
+				System.out.print(A[i]+" ");
+			}
+			System.out.println();			
+		}
 	}
 	
 }
