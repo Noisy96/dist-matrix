@@ -29,17 +29,27 @@ public class GridUser extends GridSim {
 		this.allocatedCompUnits = new ArrayList<CompUnit>();
 	}
 	
-	// Separate each matrix into two pieces
 	public void body() {
+		ArrayList<int[]> resultsArrays;
 		
+		createCalculationUnits();
+		
+		resultsArrays = attachingUnitsToUser();
+		
+		getCompletionMessage();
+		
+		getCompResult(resultsArrays);
+	}
+	
+	private void createCalculationUnits() {
 		System.out.println("\nCreating the calculation units:\n");
 		
 		for(int i=0; i<A.length; i++) {
 			Link link = null;
 			CompUnit compUnit = null;
 			try {
-				link = new SimpleLink("link_"+this.get_name()+"_"+i, BAUD_RATE, PROPDELAY, MTU);
-				compUnit = new CompUnit(i,"unit"+i, A[i], B);
+				link = new SimpleLink("link"+this.get_name()+"_"+i, BAUD_RATE, PROPDELAY, MTU);
+				compUnit = new CompUnit(i, this.get_name() ,"unit"+i, A[i], B);
 				link.attach(this, compUnit);
 			} catch (ParameterException e) {
 	            System.err.println("Invalid Parameters creating link " + e.getMessage());
@@ -49,6 +59,9 @@ public class GridUser extends GridSim {
 	        }
 			this.allocatedCompUnits.add(compUnit);
 		}
+	}
+	
+	private ArrayList<int[]> attachingUnitsToUser() {
 		System.out.println("\nAttaching the created units to the user:\n");
 		
 		super.gridSimHold(100);
@@ -62,17 +75,28 @@ public class GridUser extends GridSim {
 			super.send(entityName, 10, this.PERFORM_CALCULATION);
 		}
 		
+		return resultsArrays;
+	}
+	
+	private void getCompletionMessage() {
 		while(Sim_system.running()) {
 			Sim_event ev = this.receive();
 			if(ev.get_tag() == this.RESULT_READY) {
 				int i = (int) ev.get_data();
-				System.out.println("unit"+ i + " completed calculation and array "+ (i+1) +" is ready");
+				System.out.println("[unit"+i+" of "+ this.get_name() +"] completed calculation and array "+ (i+1) +" is ready");
 			}
 		}
-		
+	}
+	
+	private void getCompResult(ArrayList<int[]> resultsArrays) {
 		for(int i=0; i<allocatedCompUnits.size(); i++) {
 			resultsArrays.add(allocatedCompUnits.get(i).returnCalculationResult());
 		}
+		
+//		Alternative way of showing the result in case of multiple users		
+//		for(int i=0; i<allocatedCompUnits.size(); i++) {
+//			CompEngine.printArray(resultsArrays.get(i));
+//		}
 		
 		int[][] finalresult = CompEngine.joinMatrixFromArrays(resultsArrays);
 		

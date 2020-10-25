@@ -10,13 +10,15 @@ public class CompUnit extends GridSim{
 	private int[][] B;
 	private int[] calculationResult;
 	private int index;
+	private String userName;
 	
-	public CompUnit(int index, String s, int[] A, int[][] B) throws Exception {
+	public CompUnit(int index, String userName, String s, int[] A, int[][] B) throws Exception {
 		super(s);
-		System.out.println(s + " is being created");
+		System.out.println("[" + s + " of "+ userName +"] is being created");
 		this.A = A;
 		this.B = B;
 		this.index = index;
+		this.userName = userName;
 	}
 	
 	public void body() {
@@ -29,9 +31,9 @@ public class CompUnit extends GridSim{
 	}
 	
 	private void performCalculation() {
-		System.out.println(this.get_name() + " is performing its calculation");
+		System.out.println("["+this.get_name() + " of "+ this.userName +"] is performing its calculation");
 		this.calculationResult = CompEngine.calculateArrayMatrixMultiplication(A, B);
-		send("user1", 10, 11, this.index);
+		send(this.userName, 10, 11, this.index);
 	}
 	
 	public int[] returnCalculationResult() {

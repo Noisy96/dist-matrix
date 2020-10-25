@@ -144,11 +144,17 @@ public class CompEngine {
 	}
 	
 	public static int[][] joinMatrixFromArrays(ArrayList<int[]> arrays) {
-		int[][] output = new int[arrays.size()][arrays.get(0).length];
-		
-		for(int i=0; i<arrays.size(); i++) {
-			for(int j=0; j<arrays.get(i).length; j++) {
-				output[i][j] = arrays.get(i)[j];
+		int[][] output = null;
+		if(arrays == null) {
+			System.err.println("null ArraysList");
+		}
+		else {
+			output = new int[arrays.size()][arrays.get(0).length];
+			
+			for(int i=0; i<arrays.size(); i++) {
+				for(int j=0; j<arrays.get(i).length; j++) {
+					output[i][j] = arrays.get(i)[j];
+				}
 			}
 		}
 		return output;

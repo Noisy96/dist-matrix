@@ -1,15 +1,7 @@
-import java.util.ArrayList;
 import java.util.Calendar;
-
 import gridsim.GridSim;
-import gridsim.ParameterException;
-import gridsim.net.Link;
-import gridsim.net.SimpleLink;
 
 public class MainPanel {
-	
-	// Making MainPanel a singleton class able to return its own instance
-	private static MainPanel instance = null;
 	
 	// TODO : Replace the hard-coded data with a file reading algorithm
 	private static int B[][] = { { 1, 1, 2, 2 }, 
@@ -24,19 +16,32 @@ public class MainPanel {
 	public static void main(String[] args) {		
 		try {			
 			// Initialize GridSim package
-			int num_user = 2;
-			Calendar calendar = Calendar.getInstance();
-			boolean trace_flag = true;
-			GridSim.init(num_user, calendar, trace_flag);
+			initSimulation();
 						
-			GridUser gridUser = new GridUser("user1", A, B);
+			// Create a grid user
+			createUsers();
 			
 			// Starting the grid simulation
-			GridSim.startGridSimulation();
+			startSimulation();
 			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		
+	}
+	
+	private static void initSimulation() {
+		int num_user = 2;
+		Calendar calendar = Calendar.getInstance();
+		boolean trace_flag = true;
+		GridSim.init(num_user, calendar, trace_flag);
+	}
+	
+	private static void createUsers() throws Exception {
+		GridUser gridUser = new GridUser("user1", A, B);
+//		GridUser gridUser2 = new GridUser("user2", A, B);
+	}
+	
+	private static void startSimulation() {
+		GridSim.startGridSimulation();
 	}
 }
