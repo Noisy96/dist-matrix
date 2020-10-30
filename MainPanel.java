@@ -9,11 +9,21 @@ public class MainPanel {
 								{ 3, 3, 5, 3 },
 								{ 4, 4, 1, 4 }};
 
-	private static int A[][] = { { 1, 1, 1, 1}, 
+	private static int A[][] = { { 1, 1, 1, 1},
 								{ 1, 1, 1, 1}, 
 								{ 1, 1, 1, 0}};
 	
-	public static void main(String[] args) {		
+	private static int C[][];
+	private static int D[][];
+	
+	public static void main(String[] args) {
+		
+		CompEngine.printMatrix(CompEngine.generateMatrix(10, 10));
+		
+		C = CompEngine.generateMatrix(50, 50);
+		D = CompEngine.generateMatrix(50, 50);
+		
+		
 		try {			
 			// Initialize GridSim package
 			initSimulation();
@@ -37,7 +47,7 @@ public class MainPanel {
 	}
 	
 	private static void createUsers() throws Exception {
-		GridUser gridUser = new GridUser("user1", A, B);
+		GridUser gridUser = new GridUser("user1", C, D);
 //		GridUser gridUser2 = new GridUser("user2", A, B);
 	}
 	

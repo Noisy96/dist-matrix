@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Random;
 
 public class CompEngine {
 	
@@ -170,6 +171,19 @@ public class CompEngine {
 			}
 			System.out.println();			
 		}
+	}
+	
+	public static int[][] generateMatrix(int row, int col) {
+		int[][] output = new int[row][col];
+		Random random = new Random();
+		
+		for(int i=0; i<row; i++) {
+			for(int j=0; j<col; j++) {
+				output[i][j] = Math.abs(random.nextInt()%20);
+			}
+		}
+		
+		return output;
 	}
 	
 }
