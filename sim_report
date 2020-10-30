@@ -1,0 +1,23 @@
+############################################################
+#                                                          #
+#                    SIMULATION REPORT                     #
+#                                                          #
+############################################################
+
+Version: SimJava 2.0
+
+Simulation date:         25 octobre 2020
+Simulation start time:   16:37:40 WAT
+Simulation end time:     16:37:40 WAT
+
+############################################################
+#            Overall simulation run information            #
+############################################################
+
+Total simulated time:    120.0
+Total transient time:    0.0
+Total steady state time: 120.0
+Transient condition:     None
+Termination condition:   None
+Output analysis method:  None
+
